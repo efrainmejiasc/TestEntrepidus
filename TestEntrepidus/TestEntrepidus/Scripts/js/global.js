@@ -4,27 +4,25 @@ function LoginUser() {
     var user = $('#user').val();
     var password = $('#password').val();
     var flag = $('#check:checked').val();
-    console.log(flag);
     if (user === '' || password === '' || flag !== 'on') {
         alert('Todos los campos son obligatorios');
         return false;
     }
-
         $.ajax({
             type: "POST",
-            url: "Default/LoginUser",
-            data: { user: user, password: password },
+            url: "Default.aspx/LoginUser",
+            data: JSON.stringify({ user: user , password: password}),
             contentType:"application/json; chartset=utf-8",
             datatype: "json",
             success: function (data) {
-                if (data.Descripcion === "Autentificacion Exitosa") {
-                    alert('exito');
+                data = JSON.stringify(data);
+                if (data.Description === "Autentificacion Exitosa") {
+                    alert(data.Description);
+                    console.log(0);
                 } else {
-                    alert('No exito');
+                    alert(data.Description);
+                    console.log(1);
                 }
-            },
-            error: function () {
-                alert(error);
             },
             complete: function () {
                 console.log('LOGINUSER');

@@ -7,9 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TestEntrepidus {
-    
-    
-    public partial class _Default {
+namespace TestEntrepidus
+{
+
+
+    public partial class Default
+    {
     }
 }
