@@ -39,7 +39,7 @@ namespace TestEntrepidus
     #endregion
 		
 		public ContextDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["TestEntrepidusConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["CNX_DB"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

@@ -19,24 +19,23 @@
           <div class="divBan container">
             <div class="col-md-4 container">
                 <h4>Autentificacion de Usuario</h4><br>
-                <input type="text" id="user" name="user" placeholder="Ingresa Usuario" required oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')" class="form-control" /><br />
+                <input type="text" id="user" name="user" placeholder="Ingresa Usuario" required oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')" class="form-control" autocomplete="off"/><br />
                  <input type="password" id="password" name="password" placeholder="Ingresa Password" required oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')" class="form-control" /><br />
                  <label class="checkbox-inline"><input type="checkbox" id="check" name="check" required class="btn btn-primary" /> No soy un robot</label><br /><br />
 
-                <input type="submit" id="enviar" value="Enviar" class="voton btn btn-primary" onclick="LoginUser();"/>
+                <input type="button" id="enviar" value="Enviar" class="voton btn btn-primary" onclick="LoginUser();"/>
                <input type="reset" id="cancelar" value="Cancelar" onclick="Limpiar();" class="voton btn btn-primary" />
            </div>
         </div>
        </div>
     </div>
 
-    <script type="text/javascript">
+ <script type="text/javascript">
     function Limpiar() {
         $('#user').val('');
         $('#password').val('');
         $("input[type=checkbox]").prop("checked", false);
-        }
-
-        
+     } 
+    
 </script>
 </asp:Content>
