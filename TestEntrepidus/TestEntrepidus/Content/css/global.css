@@ -42,6 +42,13 @@ input:valid {
     font-family: 'Times New Roman';
 }
 
+.lblMsj2 {
+    margin-left: 0%;
+    color: silver;
+    font-size: smaller;
+    font-family: 'Times New Roman';
+}
+
 .listBanner {
     color: white;
     font-size: 14px;

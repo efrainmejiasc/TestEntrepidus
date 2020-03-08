@@ -15,22 +15,33 @@
        <div class="col-md-4">
           <div class="divBan container">
           <h4>Nuevo Empleado</h4><br>
-              <label class="checkbox-inline"><input type="checkbox" id="v" required class="btn btn-primary" /> Venezolano</label>
-               <label class="checkbox-inline"><input type="checkbox" id="e" required class="btn btn-primary" /> Extranjero</label><br /><br />
-              <asp:TextBox ID="ci" runat="server" class="form-control" autocomplete="off" required="true" oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  placeholder="Ingrese Cedula identidad"></asp:TextBox><br />
-              <asp:TextBox ID="name" runat="server" class="form-control" autocomplete="off" required="true" oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  placeholder="Ingrese Nombre"></asp:TextBox><br />
-              <asp:TextBox ID="lastName" runat="server" class="form-control" autocomplete="off" required="true" oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  placeholder="Ingrese Apellido"></asp:TextBox><br />
-              <asp:TextBox ID="direccion" runat="server" class="form-control" autocomplete="off" required="true" oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  placeholder="Ingrese Direccion"></asp:TextBox><br />
-              <asp:TextBox ID="email" runat="server" class="form-control" autocomplete="off" required="true" oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  placeholder="Ingrese Email"></asp:TextBox><br />
-              <asp:TextBox ID="phone" runat="server" class="form-control" autocomplete="off" required="true" oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  placeholder="Ingrese Telefono"></asp:TextBox><br />
-              <label  class="lblMsj">Fecha Contrato</label><br />
-              <input type="date" id="dateContract" value="2018-07-22" min="2018-01-01" max="2018-12-31" class="form-control" placeholder="Ingrese Telefono" ><br />
-              <label  class="lblMsj">Fecha Nacimiento</label><br />
-              <input type="date" id="birthDate"  value="2018-07-22" min="2018-01-01" max="2018-12-31" class="form-control"><br />
-              <asp:TextBox ID="rate" runat="server" class="form-control" autocomplete="off" required="true" oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  placeholder="Ingrese tarifa"></asp:TextBox><br />
-              <label class="checkbox-inline"><input type="checkbox" id="frelance" required class="btn btn-primary" /> Freelance</label><br /><br />
-              <asp:Button ID="btnBB" runat="server" Text="Enviar" cssClass="voton btn btn-primary" />
-              <asp:Button ID="Button1" runat="server" Text="Cancelar" cssClass="voton btn btn-primary"/>
+
+
+              <label class="checkbox-inline"><input type="checkbox" id="v" name="v" class="btn btn-primary" /> Venezolano</label>
+              <label class="checkbox-inline"><input type="checkbox" id="e"  name="e" class="btn btn-primary" /> Extranjero</label><br /><br />
+              <asp:HiddenField ID="nacionalidad" runat="server" />
+
+              <asp:TextBox ID="identificationNumber" Name="identificationNumber" runat="server" class="form-control" autocomplete="off" required="true" oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  placeholder="Ingrese Cedula identidad"></asp:TextBox><br />
+              <asp:TextBox ID="firstName" Name="firstName" runat="server" class="form-control" autocomplete="off" required="true" oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  placeholder="Ingrese Nombre"></asp:TextBox><br />
+              <asp:TextBox ID="lastName" Name="lastName" runat ="server" class="form-control" autocomplete="off" required="true" oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  placeholder="Ingrese Apellido"></asp:TextBox><br />
+              <asp:TextBox ID="direccion" Name="direccion" runat="server" class="form-control" autocomplete="off" required="true" oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  placeholder="Ingrese Direccion"></asp:TextBox><br />
+              <asp:TextBox ID="email" Name="email" runat="server" class="form-control" autocomplete="off" required="true" oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  placeholder="Ingrese Email"></asp:TextBox><br />
+              <asp:TextBox ID="phone" Name="phone" runat="server" class="form-control" autocomplete="off" required="true" oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  placeholder="Ingrese Telefono"></asp:TextBox><br />
+          
+              <label  class="lblMsj2">Fecha Contrato</label><br />
+              <input type="date" id="contractDate" name="contractDate" value="" min="" max="" class="form-control" runat="server" required ><br />
+
+              <label  class="lblMsj2">Fecha Nacimiento</label><br />
+              <input type="date" id="birthDate"  name="birthDate" value="" min="" max="" class="form-control" runat="server" required ><br />
+
+              <label  class="lblMsj2">Tarifa hora</label><br />
+               <input type="number" id="rate" name="rate" min="1" max="999999999" step="1.5" class="form-control"  required oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  runat="server" ><br />
+
+              <label class="checkbox-inline"><input type="checkbox" id="freeLance"  name="freeLance" class="btn btn-primary" runat="server" /> Freelance</label><br /><br />
+
+              <asp:Button ID="createEmployee" runat="server" Text="Enviar" cssClass="voton btn btn-primary" OnClick="createEmployee_Click" />
+              <asp:Button ID="btnClear" runat="server" Text="Cancelar" cssClass="voton btn btn-primary" OnClientClick ="ClearForm();"/>
+  
        </div>
        </div>
     <br /><br />
@@ -38,7 +49,19 @@
 </div>
 
 <script type="text/javascript">
+    $("#v").click(function () {
+        $('#e').prop("checked", false);
+        $("#MainContent_nacionalidad").val('V-');
+    }); 
 
+    $("#e").click(function () {
+        $('#v').prop("checked", false);
+        $('#MainContent_nacionalidad').val('E-')
+    }); 
+
+    function Result(msj) {
+        alert(msj);
+    }
 </script>
 
 </asp:Content>

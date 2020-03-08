@@ -35,5 +35,18 @@ namespace TestEntrepidus.Engine
             return resultado;
         }
 
+        public bool CreateEmployee(Employee emp)
+        {
+            bool resultado = false;
+            using (ContextDataContext context = new ContextDataContext())
+            {
+                context.Employee.InsertOnSubmit(emp);
+                context.SubmitChanges();
+                resultado = true;
+            }
+
+            return resultado;
+        }
+
     }
 }

@@ -61,10 +61,6 @@ function CreateAdministrator() {
             num= true;
     }
 
-    console.log(min);
-    console.log(may);
-    console.log(num);
-
 
     if (min === false && may === false) {
         CancelSubmit( 'El password debe contener letras');

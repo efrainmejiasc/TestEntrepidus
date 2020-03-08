@@ -7,29 +7,40 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace TestEntrepidus {
-    
-    
-    public partial class Contact {
-        
+namespace TestEntrepidus
+{
+
+
+    public partial class Contact
+    {
+
         /// <summary>
-        /// Control ci.
+        /// Control nacionalidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ci;
-        
+        protected global::System.Web.UI.WebControls.HiddenField nacionalidad;
+
         /// <summary>
-        /// Control name.
+        /// Control identificationNumber.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox name;
-        
+        protected global::System.Web.UI.WebControls.TextBox identificationNumber;
+
+        /// <summary>
+        /// Control firstName.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox firstName;
+
         /// <summary>
         /// Control lastName.
         /// </summary>
@@ -38,7 +49,7 @@ namespace TestEntrepidus {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox lastName;
-        
+
         /// <summary>
         /// Control direccion.
         /// </summary>
@@ -47,7 +58,7 @@ namespace TestEntrepidus {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox direccion;
-        
+
         /// <summary>
         /// Control email.
         /// </summary>
@@ -56,7 +67,7 @@ namespace TestEntrepidus {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox email;
-        
+
         /// <summary>
         /// Control phone.
         /// </summary>
@@ -65,7 +76,25 @@ namespace TestEntrepidus {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox phone;
-        
+
+        /// <summary>
+        /// Control contractDate.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl contractDate;
+
+        /// <summary>
+        /// Control birthDate.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl birthDate;
+
         /// <summary>
         /// Control rate.
         /// </summary>
@@ -73,24 +102,33 @@ namespace TestEntrepidus {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox rate;
-        
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl rate;
+
         /// <summary>
-        /// Control btnBB.
+        /// Control freeLance.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBB;
-        
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox freeLance;
+
         /// <summary>
-        /// Control Button1.
+        /// Control createEmployee.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button createEmployee;
+
+        /// <summary>
+        /// Control btnClear.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClear;
     }
 }
