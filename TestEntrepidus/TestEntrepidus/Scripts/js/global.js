@@ -4,11 +4,17 @@ function LoginUser() {
     var user = $('#user').val();
     var password = $('#password').val();
     var flag = $('#check:checked').val();
+    var flag2 = $('#check2:checked').val();
     if (user === '' || password === '' || flag !== 'on') {
         alert('Todos los campos son obligatorios');
         return false;
     }
-    var parametros = JSON.stringify({ user: user, password: password });
+    var session = '';
+    if (flag2 === 'on') {
+        session = 'si';
+    }
+
+    var parametros = JSON.stringify({ user: user, password: password,session: session });
     $.ajax({
         type: "POST",
         url: "Default.aspx/LoginUser",
@@ -16,15 +22,12 @@ function LoginUser() {
         contentType: "application/json; chartset=utf-8",
         datatype: "json",
         success: function (data) {
-            var dtP = JSON.parse(data.d);
-            console.log(dtP);
-            if (dtP.Description === 'Autentificacion Exitosa')
-                alert(dtP.Description);
+            var respuesta = JSON.parse(data.d);
+            console.log(respuesta);
+            if (respuesta.Description === 'Autentificacion Exitosa')
+                alert(respuesta.Description);
             else
-                alert(dtP.Description);
-        },
-        failure: function () {
-            console.log(failure);
+                alert(respuesta.Description);
         },
         complete: function () {
             console.log('LOGINUSER');
@@ -33,13 +36,12 @@ function LoginUser() {
 }
 
 function CreateAdministrator() {
+
     var name = $('#name').val();
     var lastName = $('#lastName').val();
     var user = $('#user').val();
     var a = $('#password').val();
     var b = $('#password2').val();
-
-
 
     if (a !== b) {
         alert('Los passwords deben ser identicos');
@@ -61,7 +63,6 @@ function CreateAdministrator() {
             num= true;
     }
 
-
     if (min === false && may === false) {
         CancelSubmit( 'El password debe contener letras');
         return false;
@@ -72,20 +73,20 @@ function CreateAdministrator() {
     }
 
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "About.aspx/CreateAdministrator",
         data: JSON.stringify({ name: name , lastName: lastName, user: user, password: a }),
         contentType: "application/json; chartset=utf-8",
         datatype: "json",
         success: function (data) {
-            var dtP = JSON.parse(data.d);
-            if (dtP.Description === 'Administrador creado satisfactoriamente') {
-                console.log(dtP);
-                alert(dtP.Description);
+            var respuesta = JSON.parse(data.d);
+            if (respuesta.Description === 'Administrador creado satisfactoriamente') {
+                console.log(respuesta);
+                alert(respuesta.Description);
                 NavePage('Default.aspx');
             }
             else {
-                alert(dtp.Description);
+                alert(respuesta.Description);
             }
         },
         complete: function () {
@@ -98,7 +99,7 @@ function CreateAdministrator() {
 function CancelSubmit(msj) {
     document.getElementById('validacion').innerHTML = msj;
     document.getElementById('validacion').style.display = 'block';
-    setTimeout(HideValidation, 4000);
+    setTimeout(HideValidation, 10000);
 }
 
 function HideValidation() {

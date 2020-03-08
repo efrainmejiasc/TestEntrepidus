@@ -15,19 +15,14 @@ namespace TestEntrepidus
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string es = string.Empty;
             if (!IsPostBack)
             {
-                es = "";
-            }
-            else
-            {
-                es = "";
+              
             }
         }
 
         [WebMethod]
-        public static string  LoginUser(string user , string password)
+        public static string  LoginUser(string user , string password, string session)
         {
             ResponseWM response = new ResponseWM();
             password = EngineTool.ConvertirBase64(user + password);
@@ -47,5 +42,6 @@ namespace TestEntrepidus
             }
             return JsonConvert.SerializeObject(response);
         }
+
     }
 }
