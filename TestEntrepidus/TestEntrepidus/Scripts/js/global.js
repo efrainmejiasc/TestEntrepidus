@@ -152,12 +152,12 @@ function EmployeeListReady() {
             $('#tableEmployee tbody tr').remove();
             $.each(emp, function (index, item) {
                 let tr = `<tr> 
-                                  <td> ${index + 1} </td>
-                                  <td> ${item.IdentificationNumber} </td>
-                                  <td> ${item.FirstName}   ${item.LastName}</td>
-                                  <td> ${item.Email} </td>
-                                  <td> <input type="button" value="Editar" class="btn btn-primary" style="width:80px;" onclick="PreventEdit('${item.IdentificationNumber}' ,'${item.FirstName}','${item.LastName}','${item.Email}');"> </td>
-                                  <td> <input type="button" value="Eliminar" class="btn btn-danger" style="width:80px;" onclick="Remove('${item.IdentificationNumber});"> </td>
+                                  <td style="text-align: center;"> ${index + 1} </td>
+                                  <td style="text-align: justify;"> ${item.IdentificationNumber} </td>
+                                  <td style="text-align: justify;"> ${item.FirstName}   ${item.LastName}</td>
+                                  <td style="text-align: justify;"> ${item.Email} </td>
+                                  <td style="text-align: center;"> <input type="button" value="Editar" class="btn btn-primary" style="width:80px;" onclick="PreventEdit('${item.IdentificationNumber}' ,'${item.FirstName}','${item.LastName}','${item.Email}');"> </td>
+                                  <td style="text-align: center;"> <input type="button" value="Eliminar" class="btn btn-danger" style="width:80px;" onclick="Remove('${item.IdentificationNumber});"> </td>
                         </tr >`;
                 $('#tableEmployee tbody').append(tr);
             });
@@ -171,13 +171,13 @@ function EmployeeListReady() {
 
 }
 
-
 function PreventEdit(id, name, lastName, email) {
     $('#ide').val(id);
     $('#ide2').val(id);
     $('#name').val(name);
     $('#lastName').val(lastName);
     $('#email').val(email);
+    $('#searchDiv').hide();
     MostrarModal();
 
 }
@@ -187,8 +187,14 @@ function Edit() {
     var firstName = $('#name').val();
     var secondName = $('#lastName').val();
     var mail = $('#email').val();
-    console.log(numberId);
-
+    if (!ValidateEmail(mail)) {
+        alert('El email no es valido');
+        return false;
+    } else if (firstName === '' || secondName === '') {
+        alert('Todos los campos requridos');
+        return false;
+    }
+    
     $.ajax({
         type: "POST",
         url: "EmployeeList.aspx/EditEmployee",
@@ -226,7 +232,6 @@ function Remove(id) {
 
 }
 
-
 function MostrarModal() {
     var modal = document.getElementById('myModal');
     modal.style.display = 'block';
@@ -235,4 +240,62 @@ function MostrarModal() {
 function CerrarModal() {
     var modal = document.getElementById('myModal');
     modal.style.display = "none";
+    $('#searchDiv').show();
+}
+
+function ValidateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+function PreventExtendSearch() {
+
+    var dateInit = $('#dateInit').val();
+    var dateEnd  = $('#dateEnd').val();
+    var textSearch = $('#textSearch').val();
+
+    var parametros = null;
+    if (dateInit === '' && dateEnd === '' && textSearch === '') {
+        return false;
+    }
+    else if (textSearch !== '') {
+
+        ExtendSearchText(textSearch);
+    }
+    else if (dateInit !== '' && dateEnd !== '') {
+        var a = new Date(dateInit);
+        var b = new Date(dateEnd);
+        if (b < a) {
+            alert('Fecha hasta no puede ser mayor a fecha desde');
+            return false;
+        }
+
+        ExtendSearchDate2(dateInit, dateEnd);
+    }
+    else if (dateInit !== '' && dateEnd === '') {
+        ExtendSearchDate(dateInit);
+    }
+    
+    return false;
+} 
+
+function ExtendSearchText(textSearch) {
+    console.log('t');
+}
+
+function ExtendSearchDate(dateInit) {
+    console.log('1');
+}
+
+function ExtendSearchDate2(dateInit, dateEnd) {
+    console.log('2');
+}
+
+
+function KeyPress() {
+    $('#dateInit').val('');
+    $('#dateEnd').val('');
+}
+function ClearText() {
+    $('#textSearch').val('');
 }

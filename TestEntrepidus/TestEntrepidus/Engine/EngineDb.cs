@@ -89,5 +89,37 @@ namespace TestEntrepidus.Engine
             return result;
         }
 
+        public List<Employee> ExtendSearchText(string text)
+        {
+
+            List<Employee> emp = new List<Employee>();
+            using (ContextDataContext context = new ContextDataContext())
+            {
+                emp = context.Employee.Where(x => x.IdentificationNumber.Contains(text) || x.FirstName.Contains(text) || x.LastName.Contains(text) || x.Email.Contains(text) || x.Direccion.Contains(text)).ToList();
+            }
+            return emp;
+        }
+
+        public List<Employee> ExtendSearchDate(DateTime contractDate)
+        {
+            List<Employee> emp = new List<Employee>();
+            using (ContextDataContext context = new ContextDataContext())
+            {
+                emp = context.Employee.Where(x => x.ContractDate == contractDate).ToList();
+            }
+            return emp;
+        }
+
+
+        public List<Employee> ExtendSearchDate2(DateTime initDate, DateTime endDate)
+        {
+            List<Employee> emp = new List<Employee>();
+            using (ContextDataContext context = new ContextDataContext())
+            {
+                emp = context.Employee.Where(x => x.ContractDate >= initDate && x.ContractDate <= endDate).ToList();
+            }
+            return emp;
+        }
+
     }
 }

@@ -54,5 +54,60 @@ namespace TestEntrepidus
 
             return JsonConvert.SerializeObject(response);
         }
+
+
+        [WebMethod]
+        public static string ExtendSearchText (string textSearch)
+        {
+            ResponseWM response = new ResponseWM();
+            EngineDb Metodo = new EngineDb();
+            bool result = false;
+
+
+
+            if (result)
+                response.Result = true;
+            else
+                response.Result = false;
+
+            return JsonConvert.SerializeObject(response);
+        }
+
+
+        [WebMethod]
+        public static string ExtendSearchDate(string dateInit)
+        {
+            ResponseWM response = new ResponseWM();
+            EngineDb Metodo = new EngineDb();
+            bool result = false;
+
+
+
+            if (result)
+                response.Result = true;
+            else
+                response.Result = false;
+
+            return JsonConvert.SerializeObject(response);
+        }
+
+
+        [WebMethod]
+        public static string ExtendSearchDate2(string dateInit, string dateEnd)
+        {
+            ResponseWM response = new ResponseWM();
+            EngineDb Metodo = new EngineDb();
+            bool result = false;
+
+
+
+            if (result)
+                response.Result = true;
+            else
+                response.Result = false;
+
+            return JsonConvert.SerializeObject(response);
+        }
+
     }
 }

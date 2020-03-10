@@ -119,3 +119,16 @@ body {
     .txtMod{
         width:300px;
     }
+
+th {
+    text-align: center;
+}
+
+td {
+    padding: 6px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
