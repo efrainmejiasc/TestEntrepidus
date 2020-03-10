@@ -11,34 +11,43 @@ namespace TestEntrepidus
 {
 
 
-    public partial class SiteMaster
+    public partial class EmployeeList
     {
 
         /// <summary>
-        /// Control logSession.
+        /// Control search.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor logSession;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText search;
 
         /// <summary>
-        /// Control userName.
+        /// Control init.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor userName;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl init;
 
         /// <summary>
-        /// Control MainContent.
+        /// Control end.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl end;
+
+        /// <summary>
+        /// Control btnSearch.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputButton btnSearch;
     }
 }

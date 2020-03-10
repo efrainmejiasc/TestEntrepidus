@@ -21,25 +21,25 @@ namespace TestEntrepidus.Engine
         }
 
 
-        private void CreateGalleta()
+        public void  CreateGalleta()
         {
-            if (HttpContext.Current.Request.Cookies["GalletaTestEntrepidus"] == null)
+            if (HttpContext.Current.Request.Cookies["Entrepidus"] == null)
             {
-                HttpCookie MiGalletaId = new HttpCookie("GalletaTestEntrepidus");
-                MiGalletaId.Value = EngineTool.ConvertirBase64(System.Web.HttpContext.Current.Session["User"].ToString());
-                MiGalletaId.Expires = DateTime.UtcNow.AddDays(3);
-                HttpContext.Current.Response.Cookies.Add(MiGalletaId);
+                HttpCookie MyId = new HttpCookie("Entrepidus");
+                MyId.Value = EngineTool.ConvertirBase64(System.Web.HttpContext.Current.Session["User"].ToString());
+                MyId.Expires = DateTime.UtcNow.Date.AddDays(1);
+                HttpContext.Current.Response.Cookies.Add(MyId);
             }
             else
             {
-                HttpCookie MiGalleta = HttpContext.Current.Request.Cookies["GalletaTestEntrepidus"];
-                DateTime expire = Convert.ToDateTime(MiGalleta.Expires);
-                if (DateTime.UtcNow > expire)
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["Entrepidus"];
+                DateTime expireDate = cookie.Expires;
+                if (DateTime.UtcNow.Date > expireDate)
                 {
-                    HttpCookie MiGalletaId = new HttpCookie("GalletaTestEntrepidus");
-                    MiGalletaId.Value = EngineTool.ConvertirBase64(System.Web.HttpContext.Current.Session["User"].ToString());
-                    MiGalletaId.Expires = DateTime.UtcNow.AddDays(3);
-                    HttpContext.Current.Response.SetCookie(MiGalletaId);
+                    HttpCookie MyId = new HttpCookie("Entrepidus");
+                    MyId.Expires = DateTime.UtcNow.AddDays(1);
+                    MyId.Value = EngineTool.ConvertirBase64(System.Web.HttpContext.Current.Session["User"].ToString());
+                    HttpContext.Current.Response.SetCookie(MyId);
                     HttpContext.Current.Response.Flush();
                 }
             }
@@ -47,16 +47,30 @@ namespace TestEntrepidus.Engine
 
         public void GetGalleta()
         {
-            if (HttpContext.Current.Request.Cookies["GalletaTestEntrepidus"] != null)
+            if (HttpContext.Current.Request.Cookies["Entrepidus"] != null )
             {
-                HttpCookie MiGalletaId = HttpContext.Current.Request.Cookies["GalletaTestEntrepidus"];
-                HttpCookie MiGalletaExpire = HttpContext.Current.Request.Cookies["GalletaTestEntrepidus"];
-                string fechaExpiracion = MiGalletaExpire.Value;
-                System.Web.HttpContext.Current.Session["User"] = EngineTool.DecodeBase64(MiGalletaId.Value);
+                HttpCookie MyId = HttpContext.Current.Request.Cookies["Entrepidus"];
+                DateTime expireDate = MyId.Expires;
+                if (DateTime.UtcNow.Date < expireDate)
+                {
+                    System.Web.HttpContext.Current.Session["User"] = null;
+                }
+                else
+                {
+                    System.Web.HttpContext.Current.Session["User"] = EngineTool.DecodeBase64(MyId.Value);
+                }
             }
-            else
+        }
+
+        public void RemoveLogin()
+        {
+            if (HttpContext.Current.Request.Cookies["Entrepidus"] != null)
             {
-                System.Web.HttpContext.Current.Session["User"] = null;
+                HttpCookie MyId = HttpContext.Current.Request.Cookies["Entrepidus"];
+                MyId.Expires = DateTime.UtcNow.Date.AddDays(-2);
+                MyId.Value = EngineTool.ConvertirBase64(System.Web.HttpContext.Current.Session["User"].ToString());
+                HttpContext.Current.Response.SetCookie(MyId);
+                HttpContext.Current.Response.Flush();
             }
         }
 

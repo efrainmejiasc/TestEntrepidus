@@ -15,10 +15,6 @@ namespace TestEntrepidus
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-              
-            }
         }
 
         [WebMethod]
@@ -26,13 +22,18 @@ namespace TestEntrepidus
         {
             ResponseWM response = new ResponseWM();
             password = EngineTool.ConvertirBase64(user + password);
-            EngineDb Metodo = new EngineDb();
-            bool result = Metodo.LoginUser(user, password);
+            EngineDb Method = new EngineDb();
+            bool result = Method.LoginUser(user, password);
             if (result)
             {
+                System.Web.HttpContext.Current.Session["User"] = user;
+                if (session == "si")
+                {
+                    EngineProject Function = new EngineProject();
+                    Function.CreateGalleta();
+                }
                 response.Description = "Autentificacion Exitosa";
                 response.Result = true;
-                System.Web.HttpContext.Current.Session["User"] = user;
             }
             else
             {
@@ -40,6 +41,19 @@ namespace TestEntrepidus
                 response.Result = false;
                 System.Web.HttpContext.Current.Session["User"] = null;
             }
+            return JsonConvert.SerializeObject(response);
+        }
+
+        [WebMethod]
+        public static string RemoveLogin()
+        {
+            EngineProject Function = new EngineProject();
+            Function.RemoveLogin();
+            System.Web.HttpContext.Current.Session["User"] = null;
+            ResponseWM response = new ResponseWM();
+            response.Description = "Sesion cerrada";
+            response.Result = true;
+        
             return JsonConvert.SerializeObject(response);
         }
 

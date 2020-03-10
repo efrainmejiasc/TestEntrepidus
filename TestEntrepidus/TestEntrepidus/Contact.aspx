@@ -42,7 +42,7 @@
               <asp:Button ID="createEmployee" runat="server" Text="Enviar" cssClass="voton btn btn-primary" OnClick="createEmployee_Click" />
               <asp:Button ID="btnClear" runat="server" Text="Cancelar" cssClass="voton btn btn-primary" OnClientClick ="ClearForm();"/>
   
-       </div>
+           </div>
        </div>
     <br /><br />
 
