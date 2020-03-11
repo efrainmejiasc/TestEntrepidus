@@ -1,0 +1,9 @@
+
+
+
+1. Ejecutar el script CreateDb.sql
+2. Ejecutar el script CreateTableAdministrator.sql
+3. Ejecutar el script CreateTableEmployee.sql
+4. Ejecutar el script InsertEmployee.sql
+5. Modificar la cadena de conexion en el archivo Web.config 
+6. Los administradores del sitio deben ser creados desde la aplicacion

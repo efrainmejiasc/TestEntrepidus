@@ -36,11 +36,11 @@
         <table id="tableEmployee" class="table table-bordered table-hover myDataTable">
        
             <thead>
-                <tr>
-                    <th>Nª</th>
-                    <th>Cedula</th>
-                    <th>Nombre</th>
-                    <th>Email</th>
+                <tr style="background-color:gainsboro;">
+                    <th onclick="SortTable(0)">Nª</th>
+                    <th onclick="SortTable(1)">Cedula</th>
+                    <th onclick="SortTable(2)">Nombre</th>
+                    <th onclick="SortTable(3)">Email</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -85,7 +85,42 @@
         EmployeeListReady();
     });
 
- 
+    function SortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("tableEmployee");
+        switching = true;
+        dir = "asc";
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
 
 </script>
 </asp:Content>
