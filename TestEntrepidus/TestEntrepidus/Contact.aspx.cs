@@ -12,10 +12,10 @@ namespace TestEntrepidus
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-          /*  if (System.Web.HttpContext.Current.Session["User"] == null)
+           if (System.Web.HttpContext.Current.Session["User"] == null)
             {
                 Response.Redirect("Default.aspx");
-            }*/
+            }
         }
 
         protected void createEmployee_Click(object sender, EventArgs e)
@@ -23,8 +23,12 @@ namespace TestEntrepidus
             string Result = "Fallo registrar empleado";
             try
             {
+                string valueHour = rate.Value ;
+                if (string.IsNullOrEmpty(valueHour))
+                    valueHour = "0.0";
+
+                valueHour = valueHour.Replace('.', ',');
                 string nation = nacionalidad.Value;
-                string valueHour = rate.Value.Replace('.', ',');
                 bool result = EngineTool.EmailEsValido(email.Text);
                 if (!result)
                 {

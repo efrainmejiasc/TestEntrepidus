@@ -49,11 +49,10 @@ namespace TestEntrepidus
         {
             EngineProject Function = new EngineProject();
             Function.RemoveLogin();
-            System.Web.HttpContext.Current.Session["User"] = null;
             ResponseWM response = new ResponseWM();
             response.Description = "Sesion cerrada";
             response.Result = true;
-        
+            System.Web.HttpContext.Current.Session["User"] = null;
             return JsonConvert.SerializeObject(response);
         }
 

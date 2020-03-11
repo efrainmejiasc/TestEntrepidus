@@ -33,10 +33,12 @@
               <label  class="lblMsj2">Fecha Nacimiento</label><br />
               <input type="date" id="birthDate"  name="birthDate" value="" min="" max="" class="form-control" runat="server" required ><br />
 
-              <label  class="lblMsj2">Tarifa hora</label><br />
-               <input type="number" id="rate" name="rate" min="1" max="999999999" step="2.5" class="form-control"  required oninvalid="setCustomValidity('Rellene esta campo')" oninput="setCustomValidity('')"  runat="server" ><br />
 
-              <label class="checkbox-inline"><input type="checkbox" id="freeLance"  name="freeLance" class="btn btn-primary" runat="server" /> Freelance</label><br /><br />
+               <label class="checkbox-inline"><input type="checkbox" id="freeLance"  name="freeLance" class="btn btn-primary" runat="server" /> Freelance</label><br />
+               <label  class="lblMsj2">Tarifa hora</label><br />
+               <input type="number" id="rate" name="rate" min="0" max="999999999" step="2.5" class="form-control"   runat="server" ><br /><br />
+
+            
 
               <asp:Button ID="createEmployee" runat="server" Text="Enviar" cssClass="voton btn btn-primary" OnClick="createEmployee_Click" />
               <asp:Button ID="btnClear" runat="server" Text="Cancelar" cssClass="voton btn btn-primary" OnClientClick ="return ClearForm();"/>
@@ -47,6 +49,11 @@
 
 <script type="text/javascript">
 
+    $(document).ready(function () {
+        $('#MainContent_rate').attr('required', false);
+        $('#MainContent_rate').val(0);
+    });
+
     $("#v").click(function () {
         $('#e').prop("checked", false);
         $("#MainContent_nacionalidad").val('V-');
@@ -55,6 +62,17 @@
     $("#e").click(function () {
         $('#v').prop("checked", false);
         $('#MainContent_nacionalidad').val('E-')
+    }); 
+
+    $("#MainContent_freeLance").click(function () {
+        var flag = $('#MainContent_freeLance:checked').val();
+        if (flag === 'on') {
+            $('#MainContent_rate').attr('required', true);
+        } else {
+            $('#MainContent_rate').attr('required', false);
+            $('#MainContent_rate').val(0);
+        }
+       
     }); 
 
     function Result(msj) {
