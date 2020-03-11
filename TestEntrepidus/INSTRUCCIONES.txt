@@ -10,3 +10,5 @@ NOTA: Todos los a archivos de script .sql se encuentran en la carpeta ScriptDB
 5. Ejecutar el script InsertEmployee.sql
 6. Modificar la cadena de conexion en el archivo Web.config 
 7. Los administradores del sitio deben ser creados desde la aplicacion
+
+posdata: *Los Paquetes Nugets de la aplicacion se deben restaurar desde el VisualStudio*
