@@ -36,6 +36,9 @@ namespace TestEntrepidus
     partial void InsertEmployee(Employee instance);
     partial void UpdateEmployee(Employee instance);
     partial void DeleteEmployee(Employee instance);
+    partial void InsertLogConnection(LogConnection instance);
+    partial void UpdateLogConnection(LogConnection instance);
+    partial void DeleteLogConnection(LogConnection instance);
     #endregion
 		
 		public ContextDataContext() : 
@@ -81,6 +84,14 @@ namespace TestEntrepidus
 			get
 			{
 				return this.GetTable<Employee>();
+			}
+		}
+		
+		public System.Data.Linq.Table<LogConnection> LogConnection
+		{
+			get
+			{
+				return this.GetTable<LogConnection>();
 			}
 		}
 	}
@@ -544,6 +555,116 @@ namespace TestEntrepidus
 					this._Rate = value;
 					this.SendPropertyChanged("Rate");
 					this.OnRateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LogConnection")]
+	public partial class LogConnection : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _IdAdministrator;
+		
+		private System.DateTime _ConnetionDate;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnIdAdministratorChanging(int value);
+    partial void OnIdAdministratorChanged();
+    partial void OnConnetionDateChanging(System.DateTime value);
+    partial void OnConnetionDateChanged();
+    #endregion
+		
+		public LogConnection()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAdministrator", DbType="Int NOT NULL")]
+		public int IdAdministrator
+		{
+			get
+			{
+				return this._IdAdministrator;
+			}
+			set
+			{
+				if ((this._IdAdministrator != value))
+				{
+					this.OnIdAdministratorChanging(value);
+					this.SendPropertyChanging();
+					this._IdAdministrator = value;
+					this.SendPropertyChanged("IdAdministrator");
+					this.OnIdAdministratorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ConnetionDate", DbType="DateTime NOT NULL")]
+		public System.DateTime ConnetionDate
+		{
+			get
+			{
+				return this._ConnetionDate;
+			}
+			set
+			{
+				if ((this._ConnetionDate != value))
+				{
+					this.OnConnetionDateChanging(value);
+					this.SendPropertyChanging();
+					this._ConnetionDate = value;
+					this.SendPropertyChanged("ConnetionDate");
+					this.OnConnetionDateChanged();
 				}
 			}
 		}
