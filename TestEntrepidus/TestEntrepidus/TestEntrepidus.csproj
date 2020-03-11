@@ -254,6 +254,7 @@
     </Compile>
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\LogConnection.cs" />
     <Compile Include="Models\ResponseWM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

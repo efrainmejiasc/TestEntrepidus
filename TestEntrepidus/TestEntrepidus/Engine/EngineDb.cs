@@ -17,9 +17,26 @@ namespace TestEntrepidus.Engine
             {
                  adm = context.Administrator.Where(s => s.Username == user && s.Password == password).FirstOrDefault();
                  if (adm != null)
+                 {
+                    InsertLogConnection(adm.Id);
                     result = true;
+                 }      
             }
                 return result;
+        }
+
+        public void InsertLogConnection(int id)
+        {
+            LogConnection cnx = new LogConnection()
+            {
+                IdAdministrator = id,
+                ConnetionDate = DateTime.UtcNow
+            };
+            using (ContextDataContext context = new ContextDataContext())
+            {
+                context.LogConnection.InsertOnSubmit(cnx);
+                context.SubmitChanges();
+            }
         }
 
         public bool CreateAdministrator (Administrator adm)
