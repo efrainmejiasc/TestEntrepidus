@@ -111,7 +111,7 @@ namespace TestEntrepidus.Engine
         }
 
 
-        public List<Employee> ExtendSearchDate2(DateTime initDate, DateTime endDate)
+        public List<Employee> ExtendSearchDate(DateTime initDate, DateTime endDate)
         {
             List<Employee> emp = new List<Employee>();
             using (ContextDataContext context = new ContextDataContext())

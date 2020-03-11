@@ -66,6 +66,18 @@
             </div>
         </div>
            </div>
+
+       <div id="myModal2" class="modal2" style="margin-top:8%;">
+           <div class="modal-content">
+            <div align="center">
+                 <input type="hidden" id="yesno"/>
+                 <span id="close" class="close"  style="float:right;" onclick="HideModal();">&times;</span><br /><br />
+                 <label>¿Realmente desea eliminar este registro?</label>
+                 <input type="button" class="btn-danger form-control" value="SI" onclick="Remove();" /><br /><br />
+             </div>
+
+           </div>
+         </div>
     </div>
 
 <script>

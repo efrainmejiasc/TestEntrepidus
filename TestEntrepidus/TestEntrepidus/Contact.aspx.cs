@@ -12,10 +12,10 @@ namespace TestEntrepidus
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (System.Web.HttpContext.Current.Session["User"] == null)
+          /*  if (System.Web.HttpContext.Current.Session["User"] == null)
             {
                 Response.Redirect("Default.aspx");
-            }
+            }*/
         }
 
         protected void createEmployee_Click(object sender, EventArgs e)

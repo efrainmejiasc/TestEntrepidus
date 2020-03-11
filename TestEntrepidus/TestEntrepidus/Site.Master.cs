@@ -20,7 +20,7 @@ namespace TestEntrepidus
                 EngineProject Funcion = new EngineProject();
                 Funcion.GetGalleta();
             }
-            if (System.Web.HttpContext.Current.Session["User"] != null)
+           if (System.Web.HttpContext.Current.Session["User"] != null)
             {
                 userName.InnerText = System.Web.HttpContext.Current.Session["User"].ToString();
                 logSession.InnerText = "Cerrar Session";

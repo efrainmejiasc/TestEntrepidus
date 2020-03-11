@@ -39,8 +39,9 @@ namespace TestEntrepidus.Engine
                     HttpCookie MyId = new HttpCookie("Entrepidus");
                     MyId.Expires = DateTime.UtcNow.AddDays(1);
                     MyId.Value = EngineTool.ConvertirBase64(System.Web.HttpContext.Current.Session["User"].ToString());
-                    HttpContext.Current.Response.SetCookie(MyId);
-                    HttpContext.Current.Response.Flush();
+                    HttpContext.Current.Response.Cookies.Add(MyId);
+                   // HttpContext.Current.Response.SetCookie(MyId);
+                    //HttpContext.Current.Response.Flush();
                 }
             }
         }
@@ -51,7 +52,7 @@ namespace TestEntrepidus.Engine
             {
                 HttpCookie MyId = HttpContext.Current.Request.Cookies["Entrepidus"];
                 DateTime expireDate = MyId.Expires;
-                if (DateTime.UtcNow.Date < expireDate)
+                if (DateTime.UtcNow.Date > expireDate)
                 {
                     System.Web.HttpContext.Current.Session["User"] = null;
                 }
@@ -67,10 +68,12 @@ namespace TestEntrepidus.Engine
             if (HttpContext.Current.Request.Cookies["Entrepidus"] != null)
             {
                 HttpCookie MyId = HttpContext.Current.Request.Cookies["Entrepidus"];
-                MyId.Expires = DateTime.UtcNow.Date.AddDays(-2);
+                MyId.Expires = DateTime.UtcNow.Date.AddDays(-3);
                 MyId.Value = EngineTool.ConvertirBase64(System.Web.HttpContext.Current.Session["User"].ToString());
-                HttpContext.Current.Response.SetCookie(MyId);
-                HttpContext.Current.Response.Flush();
+                HttpContext.Current.Response.Cookies.Add(MyId);
+                //HttpContext.Current.Response.SetCookie(MyId);
+                //HttpContext.Current.Response.Flush();
+                
             }
         }
 

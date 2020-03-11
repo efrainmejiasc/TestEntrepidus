@@ -149,18 +149,7 @@ function EmployeeListReady() {
         datatype: "json",
         success: function (data) {
             var emp = JSON.parse(data.d);
-            $('#tableEmployee tbody tr').remove();
-            $.each(emp, function (index, item) {
-                let tr = `<tr> 
-                                  <td style="text-align: center;"> ${index + 1} </td>
-                                  <td style="text-align: justify;"> ${item.IdentificationNumber} </td>
-                                  <td style="text-align: justify;"> ${item.FirstName}   ${item.LastName}</td>
-                                  <td style="text-align: justify;"> ${item.Email} </td>
-                                  <td style="text-align: center;"> <input type="button" value="Editar" class="btn btn-primary" style="width:80px;" onclick="PreventEdit('${item.IdentificationNumber}' ,'${item.FirstName}','${item.LastName}','${item.Email}');"> </td>
-                                  <td style="text-align: center;"> <input type="button" value="Eliminar" class="btn btn-danger" style="width:80px;" onclick="Remove('${item.IdentificationNumber});"> </td>
-                        </tr >`;
-                $('#tableEmployee tbody').append(tr);
-            });
+            CrearTabla(emp);
         },
         complete: function () {
             console.log('EMPLOYEELISTREADY');
@@ -169,6 +158,21 @@ function EmployeeListReady() {
     });
     return false;
 
+}
+
+function CrearTabla(emp) {
+    $('#tableEmployee tbody tr').remove();
+    $.each(emp, function (index, item) {
+        let tr = `<tr> 
+                      <td style="text-align: center;"> ${index + 1} </td>
+                      <td style="text-align: justify;"> ${item.IdentificationNumber} </td>
+                      <td style="text-align: justify;"> ${item.FirstName}   ${item.LastName}</td>
+                      <td style="text-align: justify;"> ${item.Email} </td>
+                      <td style="text-align: center;"> <input type="button" value="Editar" class="btn btn-primary" style="width:80px;" onclick="PreventEdit('${item.IdentificationNumber}' ,'${item.FirstName}','${item.LastName}','${item.Email}');"> </td>
+                      <td style="text-align: center;"> <input type="button" value="Eliminar" class="btn btn-warning" style="width:80px;" onclick="ShowModal('${item.IdentificationNumber}');"> </td>
+                        </tr >`;
+        $('#tableEmployee tbody').append(tr);
+    });   
 }
 
 function PreventEdit(id, name, lastName, email) {
@@ -210,11 +214,28 @@ function Edit() {
             return false;
         }
     });
-
 }
 
+function ShowModal(id) {
+    var modal = document.getElementById('myModal2');
+    modal.style.display = 'block';
+    $('#searchDiv').hide();
+    $('#yesno').val(id);
+}
 
-function Remove(id) {
+function HideModal() {
+    $('#yesno').val('');
+    var modal = document.getElementById('myModal2');
+    modal.style.display = "none";
+    $('#searchDiv').show();
+}
+
+function Remove() {
+
+    var id = $('#yesno').val();
+    if (id === '')
+        return false;
+
     $.ajax({
         type: "POST",
         url: "EmployeeList.aspx/DeleteEmployee",
@@ -223,13 +244,14 @@ function Remove(id) {
         datatype: "json",
         success: function (data) {
             EmployeeListReady();
+            HideModal();
         },
         complete: function () {
+            $('#yesno').val('');
             console.log('REMOVE');
             return false;
         }
     });
-
 }
 
 function MostrarModal() {
@@ -280,22 +302,65 @@ function PreventExtendSearch() {
 } 
 
 function ExtendSearchText(textSearch) {
-    console.log('t');
+    $.ajax({
+        type: "POST",
+        url: "EmployeeList.aspx/ExtendSearchText",
+        data: JSON.stringify({ textSearch: textSearch }),
+        contentType: "application/json; chartset=utf-8",
+        datatype: "json",
+        success: function (data) {
+            var emp = JSON.parse(data.d);
+            CrearTabla(emp);
+        },
+        complete: function () {
+            console.log('EXTENDSEARCHTEXT');
+            return false;
+        }
+    });
 }
 
 function ExtendSearchDate(dateInit) {
-    console.log('1');
+    $.ajax({
+        type: "POST",
+        url: "EmployeeList.aspx/ExtendSearchDate",
+        data: JSON.stringify({ dateInit: dateInit }),
+        contentType: "application/json; chartset=utf-8",
+        datatype: "json",
+        success: function (data) {
+            var emp = JSON.parse(data.d);
+            CrearTabla(emp);
+        },
+        complete: function () {
+            console.log('EXTENDSEARCHDATEINIT');
+            return false;
+        }
+    });
 }
 
 function ExtendSearchDate2(dateInit, dateEnd) {
-    console.log('2');
+    $.ajax({
+        type: "POST",
+        url: "EmployeeList.aspx/ExtendSearchDate2",
+        data: JSON.stringify({ dateInit: dateInit , dateEnd: dateEnd }),
+        contentType: "application/json; chartset=utf-8",
+        datatype: "json",
+        success: function (data) {
+            var emp = JSON.parse(data.d);
+            CrearTabla(emp);
+        },
+        complete: function () {
+            console.log('EXTENDSEARCHDATEINIT');
+            return false;
+        }
+    });
 }
 
 
 function KeyPress() {
     $('#dateInit').val('');
     $('#dateEnd').val('');
-}
+    }
+
 function ClearText() {
     $('#textSearch').val('');
 }

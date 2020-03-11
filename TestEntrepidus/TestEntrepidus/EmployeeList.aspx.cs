@@ -15,7 +15,10 @@ namespace TestEntrepidus
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           /* if (System.Web.HttpContext.Current.Session["User"] == null)
+            {
+                Response.Redirect("Default.aspx");
+            }*/
         }
 
 
@@ -59,18 +62,9 @@ namespace TestEntrepidus
         [WebMethod]
         public static string ExtendSearchText (string textSearch)
         {
-            ResponseWM response = new ResponseWM();
             EngineDb Metodo = new EngineDb();
-            bool result = false;
-
-
-
-            if (result)
-                response.Result = true;
-            else
-                response.Result = false;
-
-            return JsonConvert.SerializeObject(response);
+            List<Employee> model = Metodo.ExtendSearchText(textSearch);
+            return JsonConvert.SerializeObject(model);
         }
 
 
@@ -79,16 +73,8 @@ namespace TestEntrepidus
         {
             ResponseWM response = new ResponseWM();
             EngineDb Metodo = new EngineDb();
-            bool result = false;
-
-
-
-            if (result)
-                response.Result = true;
-            else
-                response.Result = false;
-
-            return JsonConvert.SerializeObject(response);
+            List<Employee> model = Metodo.ExtendSearchDate(Convert.ToDateTime(dateInit));
+            return JsonConvert.SerializeObject(model);
         }
 
 
@@ -97,16 +83,9 @@ namespace TestEntrepidus
         {
             ResponseWM response = new ResponseWM();
             EngineDb Metodo = new EngineDb();
-            bool result = false;
+            List<Employee> model = Metodo.ExtendSearchDate(Convert.ToDateTime(dateInit), Convert.ToDateTime(dateEnd));
 
-
-
-            if (result)
-                response.Result = true;
-            else
-                response.Result = false;
-
-            return JsonConvert.SerializeObject(response);
+            return JsonConvert.SerializeObject(model);
         }
 
     }
