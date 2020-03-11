@@ -1,6 +1,8 @@
 
-
-
+////////////////////////////
+NOTA: Todos los a archivos de script .sql se encuentran en la carpeta ScriptDB
+///////////////////////////
+---------------------------------------------------------------------------------
 1. Ejecutar el script CreateDb.sql
 2. Ejecutar el script CreateTableAdministrator.sql
 3. Ejecutar el script CreateTableEmployee.sql
